@@ -1,0 +1,5 @@
+#!/bin/sh
+exec 2>&1
+test -r ./conf && . ./conf
+test x"$SERVER_ADDR" = x && exit 0
+exec barrierc -f $SERVER_ADDR

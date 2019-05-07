@@ -1,0 +1,52 @@
+# https://editorconfig.org/
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+tab_width = 8
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.asm]
+indent_style = tab
+indent_size = tab
+
+[{*.bat,*.cmd}]
+end_of_line = crlf
+
+[{*.diff,*.patch}]
+trim_trailing_whitespace = false
+
+[*.go]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[*.hs]
+indent_size = 4
+
+[{*.mk,Makefile,Makefile.inc}]
+indent_style = tab
+indent_size = tab
+
+[*.py]
+indent_size = 4
+
+[*.reg]
+end_of_line = crlf
+
+[*.rs]
+indent_size = 4
+max_line_length = 99
+
+[{.gitconfig,gitconfig}]
+indent_style = tab
+indent_size = tab
+
+[LICENSE]
+indent_size = 5
+max_line_length = 78

@@ -1,0 +1,1 @@
+sudo xbps-remove -o

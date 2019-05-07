@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+mkdir -p "$HOME"/inc
+cp -f *.h "$HOME"/inc
+
+./compile *.c
+./makelib libcore.a *.o
+mkdir -p "$HOME"/lib
+exec cp -f *.a "$HOME"/lib

@@ -1,0 +1,60 @@
+shell=$(basename "$SHELL")
+shell=${shell:-sh}
+shell_config=${XDG_CONFIG_HOME:-$HOME/.config}/shell
+shell_cache=${XDG_CACHE_HOME:-$HOME/.cache}/shell
+shell_data=${XDG_DATA_HOME:-$HOME/.local/share}/shell
+
+mkdir -p "$shell_config" "$shell_cache" "$shell_data"
+
+function load {
+  typeset f
+  for f in $shell_config/$1.{$shell,sh}; do
+    if [[ -r $f ]]; then
+      . $f
+      return $?
+    fi
+  done
+}
+
+load functions
+(BASE16_SHELL_SET_BACKGROUND=false; load theme)
+
+unset -f load
+
+PS1=${|
+  \\builtin typeset pwd='${|\\builtin typeset e=$? h=$(cd ~; pwd) p=$PWD/; p=${p/#$h\//\~/}; REPLY=${p%/}; return $e}'
+  \\builtin typeset c=$(print -n "\001"; colour -f cyan; print -n "\001")
+  \\builtin typeset g=$(print -n "\001"; colour -f green; print -n "\001")
+  \\builtin typeset m=$(print -n "\001"; colour -f magenta; print -n "\001")
+  \\builtin typeset y=$(print -n "\001"; colour -f yellow; print -n "\001")
+  \\builtin typeset r=$(print -n "\001"; colour -f reset; print -n "\001")
+
+  REPLY=$'\001\r'
+  [[ $TERM = linux ]] || REPLY+='$(title "$HOSTNAME ['$pwd$'] - '$shell'")'
+  REPLY+="($c\$USER$r@$m\$HOSTNAME$r)"
+  REPLY+=' '
+  REPLY+="$g\$(date +%T)$r"
+  REPLY+=' '
+  REPLY+="[$y$pwd$r]"
+  REPLY+=$'\n'
+  REPLY+='τ '
+}
+
+HISTFILE=$shell_cache/history.$shell
+HISTSIZE=12000
+
+alias glibc='glibc '
+alias lc='ls -C'
+alias ll='ls -Fl'
+alias ls='ls -1A --color=auto'
+alias pstree='pstree -achlnp'
+alias sudo='sudo '
+
+export GPG_TTY=$(tty)
+
+set -o physical
+set -o vi
+
+trap -- "[[ -r $shell_config/logout.sh ]] && \\\\builtin . $shell_config/logout.sh" EXIT
+
+unset shell shell_cache shell_config shell_data

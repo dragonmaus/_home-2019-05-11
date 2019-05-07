@@ -1,0 +1,42 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+"$HOME"/src/c/install-all
+"$HOME"/.secret/bin/install-all
+
+./install + +.sh
+./install acpi-handler acpi-handler.sh
+./install askpass askpass.sh
+./install asound asound.sh
+./install boring boring.sh
+./install c c.sh
+./install cdiff cdiff.sed
+./install chromium glibc-exec.sh
+./install dircp dircp.sh
+./install fix-screen fix-screen.sh
+./install getpass getpass.sh
+./install geturi geturi.sh
+./install getuser getuser.sh
+./install ignore ignore.sh
+./install java glibc-exec.sh
+./install minecraft-launcher glibc-exec.sh
+./install n n.sh
+./install nvim-git-diff nvim-git-diff.sh
+./install p p.sh
+./install pass2netrc pass2netrc.sh
+./install passmenu passmenu.sh
+./install pathsort pathsort.sh
+./install pinentry-smart pinentry-smart.sh
+./install qr qr.sh
+./install qutebrowser glibc-exec.sh
+./install randomise-wallpaper randomise-wallpaper.sh
+./install ratio ratio.calc
+./install redshift-hack redshift-hack.sh
+./install remote-display remote-display.sh
+./install rt redshift-toggle.sh
+./install screencap screencap.sh
+./install set-wallpaper set-wallpaper.sh
+./install shar shar.sh
+./install sv sv.sh

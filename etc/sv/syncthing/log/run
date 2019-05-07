@@ -1,0 +1,3 @@
+#!/bin/sh
+mkdir -p /home/dragon/log/sv/syncthing
+exec svlogd -ttt /home/dragon/log/sv/syncthing

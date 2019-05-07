@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+lib/install
+
+./install en% -lcore
+./install fsync -lcore
+./install lefix -lcore
+./install printenv -lcore
+./install un% -lcore

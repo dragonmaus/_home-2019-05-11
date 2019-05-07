@@ -1,0 +1,8 @@
+pcm.speaker { type hw; card PCH }
+ctl.speaker { type hw; card PCH }
+
+pcm.headset { type hw; card LINK }
+ctl.headset { type hw; card LINK }
+
+pcm.!default pcm.speaker
+ctl.!default ctl.speaker

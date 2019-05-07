@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+main=$1
+shift
+
+rm -f "$main"
+exec tcc -ar cr "$main" "$@"

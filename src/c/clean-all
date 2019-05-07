@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+lib/clean
+
+./clean

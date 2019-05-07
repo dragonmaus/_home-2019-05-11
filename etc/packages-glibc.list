@@ -1,0 +1,13 @@
+base-voidstrap
+chromium
+dbus-glib
+nerd-fonts
+openjdk-jre
+pdf.js
+qutebrowser
+void-repo-multilib
+void-repo-multilib-nonfree
+void-repo-nonfree
+xf86-video-intel
+xf86-video-nouveau
+xorg-minimal

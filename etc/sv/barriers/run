@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec barriers -f -c ${XDG_CONFIG_HOME:-$HOME/.config}/barrier/barrier.conf

@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+bin=$HOME/bin
+dst=$1
+src=$2
+
+dst=$bin/$dst
+
+mkdir -p "$bin"
+rm -f "$dst"{new}
+cp -f "$src" "$dst"{new}
+chmod +x-w "$dst"{new}
+mv -f "$dst"{new} "$dst"

@@ -1,0 +1,10 @@
+@ECHO OFF
+
+SETLOCAL
+
+SET "BASE=%~DP0"
+CHDIR /D "%BASE%"
+
+DEL /F /Q *.a *.o >NUL 2>NUL
+
+ENDLOCAL

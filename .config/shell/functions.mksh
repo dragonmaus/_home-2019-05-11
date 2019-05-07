@@ -1,0 +1,120 @@
+function colour {
+  \\builtin typeset bold=false fore= back=
+
+  while getopts 'Bb:f:' o; do
+    case $o in
+      B) bold=true ;;
+      b) back=$OPTARG ;;
+      f) fore=$OPTARG ;;
+      *) print 'Usage: colour [-B] [-f foreground] [-b background]'; return 1 ;;
+    esac
+  done
+  (( $OPTIND > 1 )) && shift $(( OPTIND - 1 ))
+
+  case $fore in
+    black  ) fore=0 ;;
+    red    ) fore=1 ;;
+    green  ) fore=2 ;;
+    yellow ) fore=3 ;;
+    blue   ) fore=4 ;;
+    magenta) fore=5 ;;
+    cyan   ) fore=6 ;;
+    white  ) fore=7 ;;
+    reset  ) fore=9 ;;
+  esac
+
+  case $back in
+    black  ) back=0 ;;
+    red    ) back=1 ;;
+    green  ) back=2 ;;
+    yellow ) back=3 ;;
+    blue   ) back=4 ;;
+    magenta) back=5 ;;
+    cyan   ) back=6 ;;
+    white  ) back=7 ;;
+    reset  ) back=9 ;;
+  esac
+
+  print -n "\e["
+  if $bold; then
+    print -n "1"
+    [[ -n $fore || -n $back ]] && print -n ";"
+  fi
+  if [[ -n $fore ]]; then
+    print -n "3$fore"
+    [[ -n $back ]] && print -n ";"
+  fi
+  [[ -n $back ]] && print -n "4$back"
+  print -n "m"
+}
+
+function coloursay {
+  \\builtin typeset bold= fore= back= nolf=false
+
+  while getopts 'Bb:f:n' o; do
+    case $o in
+      B) bold='-B' ;;
+      b) back="-b $OPTARG" ;;
+      f) fore="-f $OPTARG" ;;
+      n) nolf=true ;;
+      *) print 'Usage: coloursay [-Bn] [-f foreground] [-b background] message...'; return 1 ;;
+    esac
+  done
+  (( $OPTIND > 1 )) && shift $(( OPTIND - 1 ))
+
+  colour $bold $back $fore
+  print -n -- "$@"
+  [[ -n $back ]] && back='-b reset'
+  [[ -n $fore ]] && fore='-f reset'
+  colour $back $fore
+  $nolf || print
+}
+
+if command -v hd >/dev/null; then
+  :
+elif command -v hexdump >/dev/null; then
+  function hd {
+    hexdump -e '"%08.8_ax  " 8/1 "%02X " "  " 8/1 "%02X "' -e '"  |" "%_p"' -e '"|\n"' "$@"
+  }
+else
+  function hd {
+    \\builtin cat "$@" | _hd
+  }
+fi
+
+function _hd {
+  \\builtin typeset -Uu -Z11 -i16 pos=0
+  \\builtin typeset -Uu -Z5 -i16 hv=2147483647
+  \\builtin typeset dasc dn i line
+  \\builtin set +U
+
+  while \\builtin read -ar -n512 line; do
+    \\builtin typeset -i1 'line[*]'
+    i=0
+    while (( i < ${#line[*]} )); do
+      dn=
+      (( (hv = line[i++]) != 0 )) && dn=${line[i-1]#1#}
+      if (( (pos & 15) == 0 )); then
+        (( pos )) && \\builtin print -r -- "$dasc|"
+        \\builtin print -nr "${pos#16#}  "
+        dasc=' |'
+      fi
+      \\builtin print -nr "${hv#16#} "
+      if [[ $dn = [[:print:]] ]]; then
+        dasc+=$dn
+      else
+        dasc+=.
+      fi
+      (( (pos++ & 15) == 7 )) && \\builtin print -nr -- '- '
+    done
+  done
+  while (( pos & 15 )); do
+    \\builtin print -nr '   '
+    (( (pos++ & 15) == 7 )) && \\builtin print -nr -- '- '
+  done
+  (( hv == 2147483647 )) || \\builtin print -r -- "$dasc|"
+}
+
+function title {
+  print -n "\e];$*\a" >/dev/tty
+}

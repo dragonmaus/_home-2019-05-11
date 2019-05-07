@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. ~/lib/echo.sh
+
+test -d _darcs || die 1 "unable to open '_darcs'"
+
+darcs setpref binariesfile _binaries
+darcs setpref boringfile _boring
+
+rm -f _darcs/prefs/binaries
+rm -f _darcs/prefs/boring
+rm -f _darcs/prefs/motd

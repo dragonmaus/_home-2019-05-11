@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+main=$1
+shift
+
+./load "$main" "$@"
+chmod -w "$main"
+mkdir -p "$HOME"/bin
+exec mv -f "$main" "$HOME"/bin/

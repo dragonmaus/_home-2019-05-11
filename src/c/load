@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+home=`dirname "$0"`
+cd "$home"
+
+main=$1
+shift
+
+test -e "$main".o -a "$main".c -nt "$main".o && rm -f "$main".o
+test -e "$main".o || ./compile "$main".c
+exec tcc -static -L"$HOME"/lib -o "$main" "$main".o "$@"
