@@ -1,4 +1,5 @@
 GraphicsMagick
+acpi_call-dkms
 alsa-utils
 barrier
 base-devel
@@ -46,9 +47,12 @@ setxkbmap
 socklog-void
 syncthing
 tcc
+tlp
+tp_smapi-dkms
 unclutter-xfixes
 vdirsyncer
 void-repo-nonfree
+x86_energy_perf_policy
 xdotool
 xf86-video-intel
 xf86-video-nouveau
