@@ -15,6 +15,7 @@ cd "$home"
 ./install cdiff cdiff.sed
 ./install chromium glibc-exec.sh
 ./install dircp dircp.sh
+./install dwarffortress glibc-exec.sh
 ./install fix-screen fix-screen.sh
 ./install getpass getpass.sh
 ./install geturi geturi.sh
