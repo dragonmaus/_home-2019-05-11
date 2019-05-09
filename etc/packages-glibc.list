@@ -3,6 +3,7 @@ base-voidstrap
 chromium
 dbus-glib
 dwarffortress
+gradle
 nerd-fonts
 openjdk-jre
 pdf.js

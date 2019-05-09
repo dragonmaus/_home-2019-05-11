@@ -20,6 +20,7 @@ cd "$home"
 ./install getpass getpass.sh
 ./install geturi geturi.sh
 ./install getuser getuser.sh
+./install gradle glibc-exec.sh
 ./install ignore ignore.sh
 ./install java glibc-exec.sh
 ./install minecraft-launcher glibc-exec.sh
