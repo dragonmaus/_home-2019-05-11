@@ -23,6 +23,7 @@ cd "$home"
 ./install ignore ignore.sh
 ./install java glibc-exec.sh
 ./install minecraft-launcher glibc-exec.sh
+./install mvn glibc-exec.sh
 ./install n n.sh
 ./install nvim-git-diff nvim-git-diff.sh
 ./install p p.sh
