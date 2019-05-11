@@ -18,6 +18,7 @@ git
 go
 gparted
 grub
+gv
 kbfs
 keybase
 khal
@@ -43,6 +44,7 @@ pinentry-tty
 python3-neovim
 qrencode
 redshift
+rustup
 setxkbmap
 socklog-void
 syncthing
@@ -60,4 +62,5 @@ xinput
 xorg-minimal
 xrdb
 xset
+xtools
 youtube-dl
