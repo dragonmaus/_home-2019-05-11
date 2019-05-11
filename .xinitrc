@@ -13,9 +13,9 @@ compton &
 redshift-hack &
 unclutter --ignore-scrolling --jitter 5 &
 
-xset s 0
-xset -dpms
-xset dpms 0
+xset +dpms
+xset dpms 300 600 900
+xset s off
 acpi-handler &
 dwmstatus &
 
